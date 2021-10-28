@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,32 +12,45 @@ namespace Scraper
     public class WebhallenScrap : ScraperClient
     {
 
-        public IWebDriver NavigateToWebhallen(IWebDriver _driver)
+
+        public List<Item> GetCards()
         {
-            _driver.Navigate().GoToUrl("https://www.webhallen.com/se/category/4684-GeForce-GTXRTX?page=4&f=attributes%5E110-1-NVIDIA%2BGeForce%2BRTX%2B3080~NVIDIA%2BGeForce%2BRTX%2B3070");
+            var client = new HttpClient();
+            var itemList = new List<Item>();
+            for (int i = 0; i < 15; i++)
+            {
+                var response = client.GetStringAsync($"https://www.webhallen.com/api/search?query%5BsortBy%5D=sales&query%5Bfilters%5D%5B0%5D%5Btype%5D=category&query%5Bfilters%5D%5B0%5D%5Bvalue%5D=4684&query%5BminPrice%5D=0&query%5BmaxPrice%5D=999999&page={i}").Result;
+
+                var cards = WebhallenCard.FromJson(response).Products.ToList();
+
+                foreach (var product in cards)
+                {
+                    var item = new Item
+                    {
+                        Name = product.Name,
+                        Price = product.Price.PricePrice.ToString(),
+                        Stock = product.Stock.Web.ToString()
+                    };
+                    itemList.Add(item);
+                }
+            }
 
 
 
-            return _driver;
+            return itemList;
         }
 
-        public ReadOnlyCollection<IWebElement> WebhallenProducts(IWebDriver driver)
-        {
-            return driver.FindElements(By.XPath("//div[@class='show-buy-btn panel-body']"));
-
-        }
-
-        public List<Item> WebhallenItemList(ReadOnlyCollection<IWebElement> webhallenProducts)
+        public List<Item> WebhallenItemList(List<Product> cards)
         {
             var itemList = new List<Item>();
 
-            foreach (var product in webhallenProducts)
+            foreach (var product in cards)
             {
                 var item = new Item
                 {
-                    Name = product.FindElement(By.XPath(".//span[@class='fixed-lines product-list-item-title title-height']/a")).Text,
-                    Price = product.FindElement(By.XPath(".//div[@class='price-value _right']/span")).Text,
-                    Stock = product.FindElement(By.Id("web_stock")).GetAttribute("title").ToString()
+                    Name = product.Name,
+                    Price = product.Price.PricePrice.ToString(),
+                    Stock = product.Stock.Web.ToString()
                 };
                 itemList.Add(item);
             }
@@ -47,6 +61,6 @@ namespace Scraper
 
 
     }
-        
+
 }
 
