@@ -14,7 +14,6 @@ namespace Scraper
 {
     public class ScraperClient
     {
-        private readonly IWebDriver _driver;
 
         public IWebDriver WebDriver()
         {
@@ -60,7 +59,7 @@ namespace Scraper
         {
             foreach (var item in itemList)
             {
-                Console.WriteLine($"Product Name: {item.Name}\nProduct Price: {item.Price}\nProduct stock: {item.Stock}");
+                Console.WriteLine($"Product Name: {item.Name}\nProduct Price: {item.Price}\nProduct stock: {item.Stock}\nStore: {item.Store}");
                 Console.WriteLine();
             }
         }

@@ -42,7 +42,8 @@ namespace Scraper
                 {
                     Name = product.FindElement(By.TagName(PRODUCTNAME)).Text,
                     Price = product.FindElement(By.CssSelector(PRODUCTPRICE)).Text,
-                    Stock = product.FindElement(By.XPath(PRODUCTSTOCK)).Text
+                    Stock = product.FindElement(By.XPath(PRODUCTSTOCK)).Text,
+                    Store = "Inet"
                 };
                 itemList.Add(item);
             }

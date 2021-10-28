@@ -16,11 +16,29 @@ namespace Scraper
     {
         static void Main(string[] args)
         {
-            // InetScraper();
+            //InetScraper();
 
             //WebhallenScrap();
 
+           KomplettScrap();
+            
 
+
+        }
+
+        private static void KomplettScrap()
+        {
+            var komplett = new KomplettScrap();
+
+            var driver = komplett.WebDriver();
+            komplett.NavigateToKomplett(driver);
+            komplett.ScrollPage(driver);
+
+            var komplettProducts = komplett.KomplettProducts(driver);
+            var productList = komplett.KomplettItemList(komplettProducts);
+
+            komplett.DisplayItems(productList);
+            driver.Close();
         }
 
         private static void WebhallenScrap()
@@ -46,6 +64,7 @@ namespace Scraper
             var productList = inet.InetItemList(inetProducts);
 
             inet.DisplayItems(productList);
+            driver.Close();
         }
     }
 }

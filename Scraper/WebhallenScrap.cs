@@ -29,7 +29,8 @@ namespace Scraper
                     {
                         Name = product.Name,
                         Price = product.Price.PricePrice.ToString(),
-                        Stock = product.Stock.Web.ToString()
+                        Stock = product.Stock.Web.ToString(),
+                        Store = "Webhallen"
                     };
                     itemList.Add(item);
                 }
