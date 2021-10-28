@@ -18,15 +18,16 @@ namespace Scraper
         {
             // InetScraper();
 
-            var webhallen = new WebhallenScrap();
-            var driver = webhallen.WebDriver();
-            webhallen.NavigateToWebhallen(driver);
-            webhallen.ScrollPage(driver);
-            
-            var webhallenProducts = webhallen.WebhallenProducts(driver);
-            var productList = webhallen.WebhallenItemList(webhallenProducts);
-            Console.WriteLine();
+            //WebhallenScrap();
 
+
+        }
+
+        private static void WebhallenScrap()
+        {
+            var webhallenScraper = new WebhallenScrap();
+            var productList = webhallenScraper.GetCards().Where(p => p.Name.Contains("3080")).ToList();
+            webhallenScraper.DisplayItems(productList);
 
         }
 
