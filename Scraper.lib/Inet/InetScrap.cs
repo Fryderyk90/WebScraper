@@ -41,14 +41,29 @@ namespace Scraper
                 Item item = new Item()
                 {
                     Name = product.FindElement(By.TagName(PRODUCTNAME)).Text,
-                    Price = product.FindElement(By.CssSelector(PRODUCTPRICE)).Text,
+                    Price = GetPrice(product), //product.FindElement(By.CssSelector(PRODUCTPRICE)).Text,
                     Stock = product.FindElement(By.XPath(PRODUCTSTOCK)).Text,
                     Store = "Inet"
                 };
                 itemList.Add(item);
+                
             }
             return itemList;
         }
+
+        private string GetPrice(IWebElement product)
+        {
+            try
+            {
+                return product.FindElement(By.CssSelector(PRODUCTPRICE)).Text;
+            }
+            catch (Exception)
+            {
+
+                return "REDUCED PRICE "+product.FindElement(By.XPath(".//span[@class='campaign-price']")).Text;
+            }
+        }
+
         public ReadOnlyCollection<IWebElement> InetProducts(IWebDriver _driver)
         {
             return _driver.FindElements(By.XPath(PRODUCTLIST));

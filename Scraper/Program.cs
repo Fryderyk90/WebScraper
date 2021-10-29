@@ -36,7 +36,9 @@ namespace Scraper
 
             Console.WriteLine("<<<<<<<<<<<<<INET>>>>>>>>>>>");
             client.DisplayItems(inetList);
+
             Console.WriteLine("<<<<<<<<<<<<<WEBHALLEN>>>>>>>>>>>");
+            
             client.DisplayItems(webhallenList);
             Console.WriteLine("<<<<<<<<<<<<<KOMPLETT>>>>>>>>>>>");
             client.DisplayItems(komplettList);
