@@ -18,6 +18,7 @@ namespace Scraper
         private string PRODUCTNAME = InetConstants.ProductNameTag;
         private string PRODUCTPRICE = InetConstants.ProductPriceCss;
         private string PRODUCTSTOCK = InetConstants.ProductStockXpath;
+        private string REDUCEDPRICE = InetConstants.ReducedPrice;
 
         public IWebDriver NavigateToInet(IWebDriver _driver)
         {
@@ -60,7 +61,7 @@ namespace Scraper
             catch (Exception)
             {
 
-                return "REDUCED PRICE "+product.FindElement(By.XPath(".//span[@class='campaign-price']")).Text;
+                return "REDUCED PRICE "+product.FindElement(By.XPath(REDUCEDPRICE)).Text;
             }
         }
 

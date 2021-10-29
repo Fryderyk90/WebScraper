@@ -18,5 +18,7 @@ namespace Scraper
         public const string ProductNameTag = "h4";
         public const string ProductPriceCss = "span[class='price']";
         public const string ProductStockXpath = ".//div[@class='stock']/div/span[2]";
+
+        public static string ReducedPrice = ".//span[@class='campaign-price']";
     }
 }
