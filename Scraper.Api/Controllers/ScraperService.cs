@@ -14,25 +14,58 @@ namespace Scraper.Api.Controllers
     public class ScraperService : ControllerBase
     {
         private readonly lib.Inet.IData _inetData;
-        
+        private readonly lib.Webhallen.IData _webhallenData;
+        private readonly lib.Komplett.IData _komplettData;
 
-        public ScraperService(IData inetData)
+
+        public ScraperService(IData inetData, lib.Webhallen.IData webhallenData, lib.Komplett.IData komplettData)
         {
             _inetData = inetData;
+            _webhallenData = webhallenData;
+            _komplettData = komplettData;
         }
 
+        [Route("/GetAllInetItems")]
         [HttpGet]
         public ActionResult<List<Item>> GetAllInetItems()
         {
-            lib.Inet.IData inetData = new lib.Inet.Aggregation.Data();
+             try
+             {
+                 return Ok(_inetData.AllItems());
+             }
+             catch (System.Exception e)
+             {
+
+                 return BadRequest(e.Message);
+             }
+
+
+        }
+
+        [Route("/GetAllWebhallenItems")]
+        [HttpGet]
+        public ActionResult<List<Item>> GetAllWebhallenItems()
+        {
             try
             {
-                var firefoxOptions = new FirefoxOptions();
-                firefoxOptions.AddArguments("--headless");
-                IWebDriver _driver = new FirefoxDriver("C:\\Program Files\\Mozilla Firefox\\firefox.exe",firefoxOptions);
-                
-                var inetItems = inetData.AllItems(_driver);
-                return Ok(inetItems);//inetItems;
+                return Ok(_webhallenData.AllItems());
+            }
+            catch (System.Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+
+
+        }
+
+        [Route("/GetAllKomplettItems")]
+        [HttpGet]
+        public ActionResult<List<Item>> GetAllKomplettItems()
+        {
+            try
+            {
+                return Ok(_komplettData.AllItems());
             }
             catch (System.Exception e)
             {
