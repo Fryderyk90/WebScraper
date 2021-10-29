@@ -19,7 +19,7 @@ namespace Scraper
         {
             
             var firefoxOptions = new FirefoxOptions();
-            firefoxOptions.AddArguments("headless");
+            firefoxOptions.AddArguments("--headless");
             IWebDriver _driver = new FirefoxDriver(firefoxOptions);
             return _driver;
         }

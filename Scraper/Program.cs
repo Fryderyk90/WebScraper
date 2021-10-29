@@ -16,30 +16,26 @@ namespace Scraper
 {
     public  class Program
     {
+       
         static void Main(string[] args)
         {
-            //InetScraper();
-
-            //WebhallenScrap();
-
-            //KomplettScrap();
-
+            
             lib.Inet.IData inetData = new lib.Inet.Aggregation.Data();
             lib.Webhallen.IData wehallenData = new lib.Webhallen.Aggregation.Data();
             lib.Komplett.IData komplettData = new lib.Komplett.Aggregation.Data();
 
-            var inetList = inetData.AllItems();
+           // var inetList = inetData.AllItems();
             var webhallenList = wehallenData.AllItems();
             var komplettList = komplettData.AllItems();
 
-            ScraperClient client = new ScraperClient();
+            ScraperClient client = new();
 
             Console.WriteLine("<<<<<<<<<<<<<INET>>>>>>>>>>>");
-            client.DisplayItems(inetList);
-
-            Console.WriteLine("<<<<<<<<<<<<<WEBHALLEN>>>>>>>>>>>");
+          //  client.DisplayItems(inetList);
             
+            Console.WriteLine("<<<<<<<<<<<<<WEBHALLEN>>>>>>>>>>>");            
             client.DisplayItems(webhallenList);
+            
             Console.WriteLine("<<<<<<<<<<<<<KOMPLETT>>>>>>>>>>>");
             client.DisplayItems(komplettList);
         }

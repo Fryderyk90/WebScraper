@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenQA.Selenium;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace Scraper.lib.Inet
 {
     public interface IData
     {
-        public List<Item> AllItems();
+        public List<Item> AllItems(IWebDriver driver);
     }
 }
