@@ -54,5 +54,6 @@ namespace Scraper
             return _driver.FindElements(By.XPath(PRODUCTLIST));
         }
 
+         
     }
 }

@@ -18,8 +18,9 @@ namespace Scraper
 
         public ReadOnlyCollection<IWebElement> KomplettProducts(IWebDriver _driver)
         {
-           
-            return _driver.FindElements(By.ClassName("responsive-content-wrapper"));           
+          //  Lazy<ReadOnlyCollection<IWebElement>> lazyList = new Lazy<ReadOnlyCollection<IWebElement>>();
+           // lazyList = _driver.FindElements(By.ClassName("responsive-content-wrapper"));
+            return _driver.FindElements(By.ClassName("product-list-item"));           
         }
 
         public List<Item> KomplettItemList(ReadOnlyCollection<IWebElement> productList)
@@ -44,15 +45,14 @@ namespace Scraper
 
         private string FindPrice(IWebElement product)
         {
-            if(product.FindElement(By.XPath(".//span[@class='product-price-now']")).Displayed)
+            try
             {
                 return product.FindElement(By.XPath(".//span[@class='product-price-now']")).Text;
-                
             }
-            else
+            catch (Exception)
             {
                 return "No Price";
-            }
+            }                        
         }
 
         private void CookieConsent(IWebDriver _driver)
@@ -62,12 +62,16 @@ namespace Scraper
         }
         private string IsInStock(IWebElement product)
         {
-            if(product.FindElement(By.XPath(".//span[@class='stockstatus-stock-details']")).Displayed)
+            try
             {
                 return product.FindElement(By.XPath(".//span[@class'stockstatus-stock-details']")).Text;
             }
-            else
+            catch (Exception)
+            {
                 return "Out Of Stock";
+            }
+
+
         }
     }
 }

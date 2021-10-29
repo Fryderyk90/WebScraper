@@ -1,4 +1,4 @@
-﻿using HtmlAgilityPack;
+﻿
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using System;
@@ -17,9 +17,10 @@ namespace Scraper
 
         public IWebDriver WebDriver()
         {
-            IWebDriver _driver = new FirefoxDriver();
-
-
+            
+            var firefoxOptions = new FirefoxOptions();
+            firefoxOptions.AddArguments("headless");
+            IWebDriver _driver = new FirefoxDriver(firefoxOptions);
             return _driver;
         }
 
@@ -38,7 +39,7 @@ namespace Scraper
                 while (true)
                 {
                     javaScriptExecutor.ExecuteScript("window.scrollTo(0, document.body.scrollHeight);");
-                    Thread.Sleep(1000);
+                    Thread.Sleep(2000);
 
                     long newHeight = (long)javaScriptExecutor.ExecuteScript("return document.body.scrollHeight");
                     if (newHeight == lastHeight)

@@ -9,7 +9,7 @@ namespace Scraper
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
 
-    public partial class WebhallenCard
+    public partial class WebhallenItem
     {
         [JsonProperty("products")]
         public Product[] Products { get; set; }
@@ -187,14 +187,14 @@ namespace Scraper
         public static implicit operator OrdersUnion(OrdersClass OrdersClass) => new OrdersUnion { OrdersClass = OrdersClass };
     }
 
-    public partial class WebhallenCard
+    public partial class WebhallenItem
     {
-        public static WebhallenCard FromJson(string json) => JsonConvert.DeserializeObject<WebhallenCard>(json, Scraper.Converter.Settings);
+        public static WebhallenItem FromJson(string json) => JsonConvert.DeserializeObject<WebhallenItem>(json, Scraper.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this WebhallenCard self) => JsonConvert.SerializeObject(self, Scraper.Converter.Settings);
+        public static string ToJson(this WebhallenItem self) => JsonConvert.SerializeObject(self, Scraper.Converter.Settings);
     }
 
     internal static class Converter

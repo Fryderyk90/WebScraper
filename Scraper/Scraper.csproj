@@ -11,4 +11,8 @@
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.30.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Scraper.lib\Scraper.lib.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -10,6 +10,8 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
+
+
 namespace Scraper
 {
     public  class Program
@@ -20,51 +22,26 @@ namespace Scraper
 
             //WebhallenScrap();
 
-           KomplettScrap();
-            
+            //KomplettScrap();
 
+            lib.Inet.IData inetData = new lib.Inet.Aggregation.Data();
+            lib.Webhallen.IData wehallenData = new lib.Webhallen.Aggregation.Data();
+            lib.Komplett.IData komplettData = new lib.Komplett.Aggregation.Data();
 
+            var inetList = inetData.AllItems();
+            var webhallenList = wehallenData.AllItems();
+            var komplettList = komplettData.AllItems();
+
+            ScraperClient client = new ScraperClient();
+
+            Console.WriteLine("<<<<<<<<<<<<<INET>>>>>>>>>>>");
+            client.DisplayItems(inetList);
+            Console.WriteLine("<<<<<<<<<<<<<WEBHALLEN>>>>>>>>>>>");
+            client.DisplayItems(webhallenList);
+            Console.WriteLine("<<<<<<<<<<<<<KOMPLETT>>>>>>>>>>>");
+            client.DisplayItems(komplettList);
         }
 
-        private static void KomplettScrap()
-        {
-            var komplett = new KomplettScrap();
-
-            var driver = komplett.WebDriver();
-            komplett.NavigateToKomplett(driver);
-            komplett.ScrollPage(driver);
-
-            var komplettProducts = komplett.KomplettProducts(driver);
-            var productList = komplett.KomplettItemList(komplettProducts);
-
-            komplett.DisplayItems(productList);
-            driver.Close();
-        }
-
-        private static void WebhallenScrap()
-        {
-            var webhallenScraper = new WebhallenScrap();
-            var productList = webhallenScraper.GetCards().Where(p => p.Name.Contains("3080")).ToList();
-            webhallenScraper.DisplayItems(productList);
-
-        }
-
-        private static void InetScraper()
-        {
-            var inet = new InetScrap();
-
-            var driver = inet.WebDriver();
-
-            inet.NavigateToInet(driver);
-
-            inet.ScrollPage(driver);
-
-            var inetProducts = inet.InetProducts(driver);
-
-            var productList = inet.InetItemList(inetProducts);
-
-            inet.DisplayItems(productList);
-            driver.Close();
-        }
+       
     }
 }
