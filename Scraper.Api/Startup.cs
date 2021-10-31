@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Scraper.lib.Webhallen.Interface;
 
 namespace Scraper.Api
 {
@@ -29,7 +30,7 @@ namespace Scraper.Api
 
             services.AddControllers();
             services.AddTransient<lib.Inet.IData, lib.Inet.Aggregation.Data>();
-            services.AddTransient<lib.Webhallen.IData, lib.Webhallen.Aggregation.Data>();
+            services.AddTransient<IData, lib.Webhallen.Aggregation.Data>();
             services.AddTransient<lib.Komplett.IData, lib.Komplett.Aggregation.Data>();
             services.AddSwaggerGen(c =>
             {
