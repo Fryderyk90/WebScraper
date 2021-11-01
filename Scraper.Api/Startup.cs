@@ -11,7 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Scraper.lib.Webhallen.Interface;
+using Scraper.lib.Webhallen;
 
 namespace Scraper.Api
 {

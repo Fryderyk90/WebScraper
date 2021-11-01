@@ -9,19 +9,21 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Scraper.lib.Webhallen.Interface;
+using Scraper.lib.Webhallen;
 
 
 namespace Scraper
 {
-    public  class Program
+    public class Program
     {
-       
+
         static void Main(string[] args)
         {
-            
+
+
+
             lib.Inet.IData inetData = new lib.Inet.Aggregation.Data();
-            IData wehallenData = new lib.Webhallen.Aggregation.Data();
+            lib.Webhallen.IData wehallenData = new lib.Webhallen.Aggregation.Data();
             lib.Komplett.IData komplettData = new lib.Komplett.Aggregation.Data();
 
             var inetList = inetData.AllItems();
@@ -32,14 +34,14 @@ namespace Scraper
 
             Console.WriteLine("<<<<<<<<<<<<<INET>>>>>>>>>>>");
             client.DisplayItems(inetList);
-            
-            Console.WriteLine("<<<<<<<<<<<<<WEBHALLEN>>>>>>>>>>>");            
+
+            Console.WriteLine("<<<<<<<<<<<<<WEBHALLEN>>>>>>>>>>>");
             client.DisplayItems(webhallenList);
-            
+
             Console.WriteLine("<<<<<<<<<<<<<KOMPLETT>>>>>>>>>>>");
             client.DisplayItems(komplettList);
         }
 
-       
+
     }
 }

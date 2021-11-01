@@ -28,8 +28,8 @@ namespace Scraper
                     var item = new Item
                     {
                         Name = product.Name,
-                        Price = product.Price.PricePrice.ToString(),
-                        Stock = product.Stock.Web.ToString(),
+                        Price = PriceNormalizer(product.Price.PricePrice.ToString()),
+                        Stock = int.Parse(product.Stock.Web.ToString()),
                         Store = "Webhallen"
                     };
                     itemList.Add(item);
@@ -50,8 +50,8 @@ namespace Scraper
                 var item = new Item
                 {
                     Name = product.Name,
-                    Price = product.Price.PricePrice.ToString(),
-                    Stock = product.Stock.Web.ToString()
+                    Price = PriceNormalizer(product.Price.ToString()),
+                    Stock = int.Parse(product.Stock.Web.ToString())
                 };
                 itemList.Add(item);
             }

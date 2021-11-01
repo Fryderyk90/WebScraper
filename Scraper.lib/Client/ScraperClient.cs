@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -65,5 +66,25 @@ namespace Scraper
             }
         }
         
+        public double PriceNormalizer(string unnormalizedPrice)
+        {
+            string onlyNumbers = ExtractNumbers(unnormalizedPrice);
+
+            double price;
+            double.TryParse(onlyNumbers.Trim().ToCharArray(), out price);
+
+            return price;
+        }
+        public int StockNormalizer(string unnormalizedStock)
+        {
+            var stock = 0;
+            
+            return stock;
+        }
+        public string ExtractNumbers(string textWithNumbers)
+        {
+            return Regex.Match(String.Concat(textWithNumbers
+            .Where(c => !Char.IsWhiteSpace(c))), @"\d+").Value;
+        }
     }
 }
