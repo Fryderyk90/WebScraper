@@ -14,11 +14,11 @@ namespace Scraper.Api.Controllers
     public class ScraperService : ControllerBase
     {
         private readonly lib.Inet.IData _inetData;
-        private readonly lib.Webhallen.Interface.IData _webhallenData;
+        private readonly lib.Webhallen.IData _webhallenData;
         private readonly lib.Komplett.IData _komplettData;
 
 
-        public ScraperService(IData inetData, lib.Webhallen.Interface.IData webhallenData, lib.Komplett.IData komplettData)
+        public ScraperService(IData inetData, lib.Webhallen.IData webhallenData, lib.Komplett.IData komplettData)
         {
             _inetData = inetData;
             _webhallenData = webhallenData;

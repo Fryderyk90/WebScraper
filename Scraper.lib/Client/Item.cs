@@ -9,8 +9,8 @@ namespace Scraper
     public class Item
     {
         public string Name { get; set; }
-        public string Stock{ get; set; }
-        public string Price { get; set; }
+        public int Stock{ get; set; }
+        public double Price { get; set; }
         public string Store { get; set; }
     }
 }

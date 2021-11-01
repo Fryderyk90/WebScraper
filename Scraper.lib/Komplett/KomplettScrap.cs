@@ -43,15 +43,16 @@ namespace Scraper
             return itemList;
         }
 
-        private string FindPrice(IWebElement product)
+        private double FindPrice(IWebElement product)
         {
             try
             {
-                return product.FindElement(By.XPath(".//span[@class='product-price-now']")).Text;
+                var unnormalizedPrice = product.FindElement(By.XPath(".//span[@class='product-price-now']")).Text;
+                return PriceNormalizer(unnormalizedPrice);
             }
             catch (Exception)
             {
-                return "No Price";
+                return 0;
             }                        
         }
 
@@ -60,15 +61,21 @@ namespace Scraper
             var cookie = _driver.FindElement(By.XPath("/html/body/div[1]/div[2]/div[1]/div/div/div[2]/form/div/div[1]/button"));
             cookie.Click();
         }
-        private string IsInStock(IWebElement product)
+        private int IsInStock(IWebElement product)
         {
             try
             {
-                return product.FindElement(By.XPath(".//span[@class'stockstatus-stock-details']")).Text;
+                var stockText = product.FindElement(By.XPath(".//span[@class'stockstatus-stock-details']")).Text;
+                
+                int stock;
+
+                int.TryParse(ExtractNumbers(stockText.Remove(stockText.IndexOf("") + 1)), out stock);
+                return stock;
+            
             }
             catch (Exception)
             {
-                return "Out Of Stock";
+                return 0;
             }
 
 

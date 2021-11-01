@@ -43,25 +43,41 @@ namespace Scraper
                 {
                     Name = product.FindElement(By.TagName(PRODUCTNAME)).Text,
                     Price = GetPrice(product), //product.FindElement(By.CssSelector(PRODUCTPRICE)).Text,
-                    Stock = product.FindElement(By.XPath(PRODUCTSTOCK)).Text,
+                    Stock = GetStock(product),
                     Store = "Inet"
                 };
                 itemList.Add(item);
-                
+
             }
             return itemList;
+
+            int GetStock(IWebElement product)
+            {                                              
+                var stockText = product.FindElement(By.XPath(PRODUCTSTOCK)).Text;
+                int stock;
+                if(stockText.Contains("slut") || stockText.Contains("Okänt"))
+                {
+                    return 0;
+                }
+                else
+                    int.TryParse(stockText, out stock);
+                    return stock;
+            }
         }
 
-        private string GetPrice(IWebElement product)
+        
+        private double GetPrice(IWebElement product)
         {
             try
-            {
-                return product.FindElement(By.CssSelector(PRODUCTPRICE)).Text;
+            {//if price throws exception, its because price has been reduced and is in other Html element.
+                var unnormalizedPrice = product.FindElement(By.CssSelector(PRODUCTPRICE)).Text;
+                return PriceNormalizer(unnormalizedPrice);    
             }
             catch (Exception)
             {
-
-                return "REDUCED PRICE "+product.FindElement(By.XPath(REDUCEDPRICE)).Text;
+                
+                var unnormalizedReducedPrice = product.FindElement(By.XPath(REDUCEDPRICE)).Text;
+                return PriceNormalizer(unnormalizedReducedPrice);
             }
         }
 
