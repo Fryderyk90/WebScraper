@@ -9,6 +9,6 @@ namespace Scraper.lib.Inet
 {
     public interface IData
     {
-        public List<Item> AllItems();
+        List<Item> AllItems();
     }
 }
