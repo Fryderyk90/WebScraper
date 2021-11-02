@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
 using Scraper.lib.Client;
 
-namespace Scraper
+namespace Scraper.lib.Komplett
 {
     public class KomplettScrap : ScraperClient
     {

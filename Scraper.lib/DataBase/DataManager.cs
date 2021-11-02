@@ -4,6 +4,8 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using Scraper.lib.Client;
 using Scraper.lib.DataBase.Interface;
+using Scraper.lib.Webhallen;
+using Scraper.lib.Webhallen.Interface;
 
 
 namespace Scraper.lib.DataBase
@@ -21,9 +23,9 @@ namespace Scraper.lib.DataBase
         public void LoadAllData()
         {
             var allData = new List<Item>();
-            lib.Inet.IData inetData = new lib.Inet.Aggregation.Data();
-            lib.Webhallen.IData wehallenData = new lib.Webhallen.Aggregation.Data();
-            lib.Komplett.IData komplettData = new lib.Komplett.Aggregation.Data();
+            Inet.Interface.IData inetData = new Inet.Data();
+            IData wehallenData = new Data();
+            Komplett.Interface.IData komplettData = new Komplett.Data();
             
             allData.AddRange(inetData.AllItems());
             allData.AddRange(wehallenData.AllItems());

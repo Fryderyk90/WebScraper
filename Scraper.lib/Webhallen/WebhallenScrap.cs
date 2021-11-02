@@ -1,14 +1,9 @@
-﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using Scraper.lib.Client;
 
-namespace Scraper
+namespace Scraper.lib.Webhallen
 {
     public class WebhallenScrap : ScraperClient
     {

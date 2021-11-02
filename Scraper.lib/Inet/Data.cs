@@ -1,12 +1,8 @@
-﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Scraper.lib.Client;
+using Scraper.lib.Inet.Interface;
 
-namespace Scraper.lib.Inet.Aggregation
+namespace Scraper.lib.Inet
 {
     public class Data : IData
     {     

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Scraper
+﻿namespace Scraper.lib.Inet
 {
     public static class InetConstants
     {
@@ -19,6 +13,6 @@ namespace Scraper
         public const string ProductPriceCss = "span[class='price']";
         public const string ProductStockXpath = ".//div[@class='stock']/div/span[2]";
         public const string ProductLink = ".//div[@class='product-text']/a[1]";
-        public static string ReducedPrice = ".//span[@class='campaign-price']";
+        public const string ReducedPrice = ".//span[@class='campaign-price']";
     }
 }

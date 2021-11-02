@@ -1,18 +1,12 @@
-﻿
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net.Http;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
-using Scraper.lib.Client;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
 
-namespace Scraper
+namespace Scraper.lib.Client
 {
     public class ScraperClient
     {
@@ -22,13 +16,13 @@ namespace Scraper
             
             var firefoxOptions = new FirefoxOptions();
             firefoxOptions.AddArguments("--headless");
-            IWebDriver _driver = new FirefoxDriver(firefoxOptions);
-            return _driver;
+            IWebDriver driver = new FirefoxDriver(firefoxOptions);
+            return driver;
         }
 
-        public void Close(WebDriver _driver)
+        public void Close(WebDriver driver)
         {
-            _driver.Close();
+            driver.Close();
         }
        
         public void ScrollPage(IWebDriver driver)

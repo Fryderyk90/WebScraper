@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Scraper.lib.Client;
+using Scraper.lib.Komplett.Interface;
 
-namespace Scraper.lib.Komplett.Aggregation
+namespace Scraper.lib.Komplett
 {
     public class Data : IData
     {

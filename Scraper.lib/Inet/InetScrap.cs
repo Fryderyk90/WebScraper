@@ -1,50 +1,39 @@
-﻿using OpenQA.Selenium;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OpenQA.Selenium;
 using Scraper.lib.Client;
 
-namespace Scraper
+namespace Scraper.lib.Inet
 {
     public class InetScrap : ScraperClient
     {
-        private string ROOT = InetConstants.Root;
-        // private string CATEGORY = InetConstants.ExpandCategory;
-        // private string SUBCATEGORY = InetConstants.GoToCategory;
-        // private string GEFORCECATEGORY = InetConstants.GoToGeforceCategory;
-        private string PRODUCTLIST = InetConstants.ProductList;
-        private string PRODUCTNAME = InetConstants.ProductNameTag;
-        private string PRODUCTLINK = InetConstants.ProductLink;
-        private string PRODUCTPRICE = InetConstants.ProductPriceCss;
-        private string PRODUCTSTOCK = InetConstants.ProductStockXpath;
-        private string REDUCEDPRICE = InetConstants.ReducedPrice;
+        private const string Root = InetConstants.Root;
+        private const string Productlist = InetConstants.ProductList;
+        private const string Productname = InetConstants.ProductNameTag;
+        private const string Productlink = InetConstants.ProductLink;
+        private const string Productprice = InetConstants.ProductPriceCss;
+        private const string Productstock = InetConstants.ProductStockXpath;
+        private const string Reducedprice = InetConstants.ReducedPrice;
 
-        public IWebDriver NavigateToInet(IWebDriver _driver)
+        public IWebDriver NavigateToInet(IWebDriver driver)
         {
             
-            _driver.Navigate().GoToUrl(ROOT);
-            // var expandCategory = _driver.FindElement(By.XPath(CATEGORY));
-            // expandCategory.Click();
-            // var goToCategory = _driver.FindElement(By.XPath(SUBCATEGORY));
-            // goToCategory.Click();
-            // var geforceCategory = _driver.FindElement(By.XPath(GEFORCECATEGORY));
-            // geforceCategory.Click();
+            driver.Navigate().GoToUrl(Root);
+           
                         
-            return _driver;
+            return driver;
         }
-        public List<Item> InetItemList(ReadOnlyCollection<IWebElement> ProductList)
+        public List<Item> InetItemList(ReadOnlyCollection<IWebElement> productList)
         {
             var itemList = new List<Item>();
-            foreach (var product in ProductList)
+            foreach (var product in productList)
             {
 
                 Item item = new Item()
                 {
-                    Name = product.FindElement(By.TagName(PRODUCTNAME)).Text,
-                    ProductLink = product.FindElement(By.XPath(PRODUCTLINK)).GetAttribute("href"),
+                    Name = product.FindElement(By.TagName(Productname)).Text,
+                    ProductLink = product.FindElement(By.XPath(Productlink)).GetAttribute("href"),
                     Price = GetPrice(product), 
                     Stock = GetStock(product),
                     Store = "Inet"
@@ -55,8 +44,9 @@ namespace Scraper
             return itemList;
 
             int GetStock(IWebElement product)
-            {                                              
-                var stockText = product.FindElement(By.XPath(PRODUCTSTOCK)).Text;
+            {
+                if (product == null) throw new ArgumentNullException(nameof(product));
+                var stockText = product.FindElement(By.XPath(Productstock)).Text;
                 int stock;
                 if(stockText.Contains("Slutsåld") || stockText.Contains("Okänt"))
                 {
@@ -74,22 +64,23 @@ namespace Scraper
         
         private double GetPrice(IWebElement product)
         {
+            if (product == null) throw new ArgumentNullException(nameof(product));
             try
             {//if price throws exception, its because price has been reduced and is in other Html element.
-                var unnormalizedPrice = product.FindElement(By.CssSelector(PRODUCTPRICE)).Text;
+                var unnormalizedPrice = product.FindElement(By.CssSelector(Productprice)).Text;
                 return PriceNormalizer(unnormalizedPrice);    
             }
             catch (Exception)
             {
                 
-                var unnormalizedReducedPrice = product.FindElement(By.XPath(REDUCEDPRICE)).Text;
+                var unnormalizedReducedPrice = product.FindElement(By.XPath(Reducedprice)).Text;
                 return PriceNormalizer(unnormalizedReducedPrice);
             }
         }
 
-        public ReadOnlyCollection<IWebElement> InetProducts(IWebDriver _driver)
+        public ReadOnlyCollection<IWebElement> InetProducts(IWebDriver driver)
         {
-            return _driver.FindElements(By.XPath(PRODUCTLIST));
+            return driver.FindElements(By.XPath(Productlist));
         }
 
          

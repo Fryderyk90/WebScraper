@@ -9,7 +9,10 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Scraper.lib.Client;
+using Scraper.lib.Inet.Interface;
 using Scraper.lib.Webhallen;
+using Data = Scraper.lib.Inet.Data;
 
 
 namespace Scraper
@@ -22,7 +25,7 @@ namespace Scraper
 
 
 
-            lib.Inet.IData inetData = new lib.Inet.Aggregation.Data();
+            IData inetData = new Data();
             // lib.Webhallen.IData wehallenData = new lib.Webhallen.Aggregation.Data();
             // lib.Komplett.IData komplettData = new lib.Komplett.Aggregation.Data();
             // lib.DataBase.DataAccess dataAccess = new();
