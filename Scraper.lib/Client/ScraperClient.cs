@@ -15,14 +15,17 @@ namespace Scraper.lib.Client
         {
             
             var firefoxOptions = new FirefoxOptions();
+            
             firefoxOptions.AddArguments("--headless");
             IWebDriver driver = new FirefoxDriver(firefoxOptions);
+            
+            
             return driver;
         }
 
-        public void Close(WebDriver driver)
+        public void Quit(IWebDriver driver)
         {
-            driver.Close();
+            driver.Quit();
         }
        
         public void ScrollPage(IWebDriver driver)

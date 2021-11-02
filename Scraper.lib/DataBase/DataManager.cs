@@ -23,15 +23,17 @@ namespace Scraper.lib.DataBase
         public void LoadAllData()
         {
             var allData = new List<Item>();
-            Inet.Interface.IData inetData = new Inet.Data();
             IData wehallenData = new Data();
+            Inet.Interface.IData inetData = new Inet.Data();
             Komplett.Interface.IData komplettData = new Komplett.Data();
             
-            allData.AddRange(inetData.AllItems());
             allData.AddRange(wehallenData.AllItems());
+            allData.AddRange(inetData.AllItems());
             allData.AddRange(komplettData.AllItems());
             
+            
             LoadDataAsync(allData);
+            
         }
 
         public async Task<List<Item>> AllItemsAsync()

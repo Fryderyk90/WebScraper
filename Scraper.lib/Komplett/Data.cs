@@ -9,11 +9,10 @@ namespace Scraper.lib.Komplett
         public List<Item> AllItems()
         {
             var komplett = new KomplettScrap();
-
+            ScraperClient client = new ScraperClient();
             var driver = komplett.WebDriver();
             komplett.NavigateToKomplett(driver);
             komplett.ScrollPage(driver);
-
             var komplettProducts = komplett.KomplettProducts(driver);
             
             return komplett.KomplettItemList(komplettProducts);

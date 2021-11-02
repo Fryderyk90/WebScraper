@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Scraper.lib.DataBase;
+using Scraper.lib.DataBase.Aggregation;
 using Scraper.lib.DataBase.Interface;
 using Scraper.lib.Webhallen;
 
@@ -33,6 +34,7 @@ namespace Scraper.Api
             services.AddControllers();
             services.AddScoped<IDataManager, DataManager>();
             services.AddScoped<IDataAccess,DataAccess>();
+            services.AddScoped<IAggregator,Aggregator>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Scraper.Api", Version = "v1" });

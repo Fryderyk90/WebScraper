@@ -16,13 +16,13 @@ namespace Scraper.Api.Controllers
     public class ScraperService : ControllerBase
     {
         private readonly IDataManager _dataManager;
-        private readonly IDataAccess _dataAccess;
+        private readonly IAggregator _aggregator;
 
 
-        public ScraperService(IDataManager dataManager, IDataAccess dataAccess)
+        public ScraperService(IDataManager dataManager, IAggregator aggregator)
         {
             _dataManager = dataManager;
-            _dataAccess = dataAccess;
+            _aggregator = aggregator;
         }
 
         [Route("/LoadData")]
@@ -86,7 +86,82 @@ namespace Scraper.Api.Controllers
                 return BadRequest();
             }
         }
-        
 
+        [Route("/AscendingStock")]
+        [HttpGet]
+        public ActionResult AscendingStock()
+        {
+            try
+            {
+                var itemsInStock = _dataManager.AllItemsInStock().Result;
+                return Ok(_aggregator.AscendingStock(itemsInStock));
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        [Route("/DescendingStock")]
+        [HttpGet]
+        public ActionResult DescendingStock()
+        {
+            try
+            {
+                var itemsInStock = _dataManager.AllItemsInStock().Result;
+                return Ok(_aggregator.DescendingStock(itemsInStock));
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        [Route("/AscendingPrice")]
+        [HttpGet]
+        public ActionResult AscendingPrice()
+        {
+            try
+            {
+                var itemsInStock = _dataManager.AllItemsInStock().Result;
+                return Ok(_aggregator.AscendingPrice(itemsInStock));
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        [Route("/DescendingPrice")]
+        [HttpGet]
+        public ActionResult DescendingPrice()
+        {
+            try
+            {
+                var itemsInStock = _dataManager.AllItemsInStock().Result;
+                return Ok(_aggregator.DescendingPrice(itemsInStock));
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [Route("/ItemsWithName")]
+        [HttpGet]
+        public ActionResult ItemsWithName(string name)
+        {
+            try
+            {
+                var itemList = _dataManager.AllItemsInStock().Result;
+                var itemsInStock = _aggregator.DescendingStock(itemList);
+                return Ok(_aggregator.ItemsWithName(itemsInStock, name));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }
