@@ -148,15 +148,31 @@ namespace Scraper.Api.Controllers
             }
         }
 
-        [Route("/ItemsWithName")]
+        [Route("/ItemsByName")]
         [HttpGet]
-        public ActionResult ItemsWithName(string name)
+        public ActionResult ItemsByName(string name)
         {
             try
             {
                 var itemList = _dataManager.AllItemsInStock().Result;
                 var itemsInStock = _aggregator.DescendingStock(itemList);
-                return Ok(_aggregator.ItemsWithName(itemsInStock, name));
+                return Ok(_aggregator.ItemsByName(itemsInStock, name));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [Route("/ItemsByStoreName")]
+        [HttpGet]
+        public ActionResult ItemsByStoreName(string name)
+        {
+            try
+            {
+                var itemList = _dataManager.AllItemsInStock().Result;
+                var itemsInStock = _aggregator.DescendingStock(itemList);
+                return Ok(_aggregator.ItemsByStoreName(itemsInStock, name));
             }
             catch (Exception e)
             {

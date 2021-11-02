@@ -28,9 +28,14 @@ namespace Scraper.lib.DataBase.Aggregation
             return itemList.OrderByDescending(item => item.Stock).ToList();
         }
 
-        public List<Item> ItemsWithName(List<Item> itemList, string name)
+        public List<Item> ItemsByName(List<Item> itemList, string name)
         {
             return itemList.FindAll(n => n.Name.Contains(name));
+        }
+
+        public List<Item> ItemsByStoreName(List<Item> itemList, string name)
+        {
+            return itemList.FindAll(n => n.Store.Contains(name));
         }
     }
 }
