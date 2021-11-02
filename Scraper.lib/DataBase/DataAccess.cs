@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 using Scraper.lib.Client;
+using Scraper.lib.DataBase.Interface;
 
 namespace Scraper.lib.DataBase
 {
-    public class DataAccess
+    public class DataAccess : IDataAccess
     {
         private const string  CollectionName = "Products";
         private const string DataBaseName = "ScraperData";
@@ -29,19 +30,5 @@ namespace Scraper.lib.DataBase
             
             return ScraperData().GetCollection<Item>(CollectionName);
         }
-
-        public async Task<List<Item>> AddDataAsync(List<Item> items)
-        {
-            await ProductCollection().InsertManyAsync(items);
-
-            return null;
-        }
-
-        public void DropCollection()
-        {
-            ScraperData().DropCollection(CollectionName);
-        }
-
-
     }
 }

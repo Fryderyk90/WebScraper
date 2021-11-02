@@ -1,7 +1,53 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using Scraper.lib.Client;
+using Scraper.lib.DataBase.Interface;
+
+
 namespace Scraper.lib.DataBase
 {
-    public class DataManager
+    public class DataManager : IDataManager
     {
-        
+        private IDataAccess DataAccess = new DataAccess();
+        public async void  LoadDataAsync(List<Item> items)
+        {
+            IDataAccess dataAccess = new DataAccess();
+            
+            await DataAccess.ProductCollection().InsertManyAsync(items);
+        }
+
+        public void LoadAllData()
+        {
+            var allData = new List<Item>();
+            lib.Inet.IData inetData = new lib.Inet.Aggregation.Data();
+            lib.Webhallen.IData wehallenData = new lib.Webhallen.Aggregation.Data();
+            lib.Komplett.IData komplettData = new lib.Komplett.Aggregation.Data();
+            
+            allData.AddRange(inetData.AllItems());
+            allData.AddRange(wehallenData.AllItems());
+            allData.AddRange(komplettData.AllItems());
+            
+            LoadDataAsync(allData);
+        }
+
+        public async Task<List<Item>> AllItemsAsync()
+        {
+            return await DataAccess.ProductCollection().Find(new BsonDocument()).ToListAsync();
+        }
+
+        public async void DropCollectionAsync()
+        {
+            
+           await DataAccess.ScraperData().DropCollectionAsync("Products");
+        }
+
+        public Task<List<Item>> AllItemsInStock()
+        {
+            var itemsInStock = DataAccess.ProductCollection().Find(i => i.Stock > 0).ToListAsync();
+
+            return itemsInStock;
+        }
     }
 }

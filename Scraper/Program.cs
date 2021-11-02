@@ -17,34 +17,34 @@ namespace Scraper
     public class Program
     {
 
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
 
 
 
-            //lib.Inet.IData inetData = new lib.Inet.Aggregation.Data();
+            lib.Inet.IData inetData = new lib.Inet.Aggregation.Data();
             // lib.Webhallen.IData wehallenData = new lib.Webhallen.Aggregation.Data();
-             lib.Komplett.IData komplettData = new lib.Komplett.Aggregation.Data();
+            // lib.Komplett.IData komplettData = new lib.Komplett.Aggregation.Data();
             // lib.DataBase.DataAccess dataAccess = new();
 
-            //var inetList = inetData.AllItems();
+            var inetList = inetData.AllItems();
             // var webhallenList = wehallenData.AllItems();
-             var komplettList = komplettData.AllItems();
+             //var komplettList = komplettData.AllItems();
 
             ScraperClient client = new();
 
             Console.WriteLine("<<<<<<<<<<<<<INET>>>>>>>>>>>");
-            //client.DisplayItems(inetList);
+            client.DisplayItems(inetList);
 
-            // Console.WriteLine("<<<<<<<<<<<<<WEBHALLEN>>>>>>>>>>>");
-            // client.DisplayItems(webhallenList);
-            //
-             Console.WriteLine("<<<<<<<<<<<<<KOMPLETT>>>>>>>>>>>");
-             client.DisplayItems(komplettList);
-            //
-            // await dataAccess.AddDataAsync(inetList);
-            // await dataAccess.AddDataAsync(webhallenList);
-            // await dataAccess.AddDataAsync(komplettList);
+            // // Console.WriteLine("<<<<<<<<<<<<<WEBHALLEN>>>>>>>>>>>");
+            // // client.DisplayItems(webhallenList);
+            // //
+            //  Console.WriteLine("<<<<<<<<<<<<<KOMPLETT>>>>>>>>>>>");
+            //  client.DisplayItems(komplettList);
+            // //
+            // // await dataAccess.AddDataAsync(inetList);
+            // // await dataAccess.AddDataAsync(webhallenList);
+            // // await dataAccess.AddDataAsync(komplettList);
         }
 
 

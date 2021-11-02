@@ -58,13 +58,16 @@ namespace Scraper
             {                                              
                 var stockText = product.FindElement(By.XPath(PRODUCTSTOCK)).Text;
                 int stock;
-                if(stockText.Contains("slut") || stockText.Contains("Okänt"))
+                if(stockText.Contains("Slutsåld") || stockText.Contains("Okänt"))
                 {
                     return 0;
                 }
                 else
-                    int.TryParse(stockText, out stock);
+                {
+                    int.TryParse(ExtractNumbers(stockText), out stock);
                     return stock;
+                }
+                    
             }
         }
 

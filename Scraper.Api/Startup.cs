@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Scraper.lib.DataBase;
+using Scraper.lib.DataBase.Interface;
 using Scraper.lib.Webhallen;
 
 namespace Scraper.Api
@@ -29,9 +31,8 @@ namespace Scraper.Api
         {
 
             services.AddControllers();
-            services.AddTransient<lib.Inet.IData, lib.Inet.Aggregation.Data>();
-            services.AddTransient<IData, lib.Webhallen.Aggregation.Data>();
-            services.AddTransient<lib.Komplett.IData, lib.Komplett.Aggregation.Data>();
+            services.AddScoped<IDataManager, DataManager>();
+            services.AddScoped<IDataAccess,DataAccess>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Scraper.Api", Version = "v1" });
