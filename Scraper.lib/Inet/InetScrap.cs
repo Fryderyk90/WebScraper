@@ -5,17 +5,19 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Scraper.lib.Client;
 
 namespace Scraper
 {
     public class InetScrap : ScraperClient
     {
         private string ROOT = InetConstants.Root;
-        private string CATEGORY = InetConstants.ExpandCategory;
-        private string SUBCATEGORY = InetConstants.GoToCategory;
-        private string GEFORCECATEGORY = InetConstants.GoToGeforceCategory;
+        // private string CATEGORY = InetConstants.ExpandCategory;
+        // private string SUBCATEGORY = InetConstants.GoToCategory;
+        // private string GEFORCECATEGORY = InetConstants.GoToGeforceCategory;
         private string PRODUCTLIST = InetConstants.ProductList;
         private string PRODUCTNAME = InetConstants.ProductNameTag;
+        private string PRODUCTLINK = InetConstants.ProductLink;
         private string PRODUCTPRICE = InetConstants.ProductPriceCss;
         private string PRODUCTSTOCK = InetConstants.ProductStockXpath;
         private string REDUCEDPRICE = InetConstants.ReducedPrice;
@@ -24,12 +26,12 @@ namespace Scraper
         {
             
             _driver.Navigate().GoToUrl(ROOT);
-            var expandCategory = _driver.FindElement(By.XPath(CATEGORY));
-            expandCategory.Click();
-            var goToCategory = _driver.FindElement(By.XPath(SUBCATEGORY));
-            goToCategory.Click();
-            var geforceCategory = _driver.FindElement(By.XPath(GEFORCECATEGORY));
-            geforceCategory.Click();
+            // var expandCategory = _driver.FindElement(By.XPath(CATEGORY));
+            // expandCategory.Click();
+            // var goToCategory = _driver.FindElement(By.XPath(SUBCATEGORY));
+            // goToCategory.Click();
+            // var geforceCategory = _driver.FindElement(By.XPath(GEFORCECATEGORY));
+            // geforceCategory.Click();
                         
             return _driver;
         }
@@ -42,6 +44,7 @@ namespace Scraper
                 Item item = new Item()
                 {
                     Name = product.FindElement(By.TagName(PRODUCTNAME)).Text,
+                    ProductLink = product.FindElement(By.XPath(PRODUCTLINK)).GetAttribute("href"),
                     Price = GetPrice(product), 
                     Stock = GetStock(product),
                     Store = "Inet"

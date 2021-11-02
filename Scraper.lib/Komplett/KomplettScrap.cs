@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
+using Scraper.lib.Client;
 
 namespace Scraper
 {
@@ -18,8 +19,6 @@ namespace Scraper
 
         public ReadOnlyCollection<IWebElement> KomplettProducts(IWebDriver _driver)
         {
-          //  Lazy<ReadOnlyCollection<IWebElement>> lazyList = new Lazy<ReadOnlyCollection<IWebElement>>();
-           // lazyList = _driver.FindElements(By.ClassName("responsive-content-wrapper"));
             return _driver.FindElements(By.ClassName("product-list-item"));           
         }
 
@@ -31,7 +30,8 @@ namespace Scraper
             {
                 var item = new Item
                 {
-                    Name = product.FindElement(By.XPath(".//div[@class='text-content']")).Text,
+                    Name = product.FindElement(By.XPath(".//div[@class='text-content']/h2")).Text,
+                    ProductLink = product.FindElement(By.XPath(".//div[@class='text-container']/a[1]")).GetAttribute("href"),
                     Price = FindPrice(product),
                     Stock = IsInStock(product),                  
                     Store = "Komplett"

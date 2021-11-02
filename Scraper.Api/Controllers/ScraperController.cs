@@ -4,6 +4,7 @@ using OpenQA.Selenium.Firefox;
 using Scraper.lib;
 using Scraper.lib.Inet;
 using System.Collections.Generic;
+using Scraper.lib.Client;
 
 namespace Scraper.Api.Controllers
 {

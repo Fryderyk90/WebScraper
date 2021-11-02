@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Scraper.lib.Client;
 
 namespace Scraper
 {
@@ -28,6 +29,7 @@ namespace Scraper
                     var item = new Item
                     {
                         Name = product.Name,
+                        ProductLink = "No Link",
                         Price = PriceNormalizer(product.Price.PricePrice.ToString()),
                         Stock = int.Parse(product.Stock.Web.ToString()),
                         Store = "Webhallen"

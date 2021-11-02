@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Scraper.lib.Client;
 
 namespace Scraper
 {
@@ -61,7 +62,7 @@ namespace Scraper
         {
             foreach (var item in itemList)
             {
-                Console.WriteLine($"Product Name: {item.Name}\nProduct Price: {item.Price}\nProduct stock: {item.Stock}\nStore: {item.Store}");
+                Console.WriteLine($"Product Name: {item.Name}\nProduct Price: {item.Price}\nProduct Link: {item.ProductLink}\nProduct stock: {item.Stock}\nStore: {item.Store}");
                 Console.WriteLine();
             }
         }
