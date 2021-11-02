@@ -42,7 +42,7 @@ namespace Scraper
                 Item item = new Item()
                 {
                     Name = product.FindElement(By.TagName(PRODUCTNAME)).Text,
-                    Price = GetPrice(product), //product.FindElement(By.CssSelector(PRODUCTPRICE)).Text,
+                    Price = GetPrice(product), 
                     Stock = GetStock(product),
                     Store = "Inet"
                 };

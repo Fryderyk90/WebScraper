@@ -9,7 +9,7 @@ namespace Scraper.lib.DataBase
 {
     public class DataAccess
     {
-        private const string  collectionName = "Products";
+        private const string collectionName = "Products";
         private const string dataBaseName = "ScraperData";
         private const string connectionString = "mongodb://localhost:27017/?readPreference=primary&appname=mongodb-vscode%200.6.14&directConnection=true&ssl=false";
         
