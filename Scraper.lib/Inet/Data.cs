@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using OpenQA.Selenium;
 using Scraper.lib.Client;
 using Scraper.lib.Inet.Interface;
 
@@ -6,6 +7,8 @@ namespace Scraper.lib.Inet
 {
     public class Data : IData
     {     
+        
+        
         public List<Item> AllItems()
         {
             Client.ScraperClient client = new ScraperClient();
@@ -14,8 +17,12 @@ namespace Scraper.lib.Inet
             inet.NavigateToInet(driver);
             inet.ScrollPage(driver);
             var inetProducts = inet.InetProducts(driver);
-            
-            return inet.InetItemList(inetProducts);
+            var allItems = inet.InetItemList(inetProducts);
+            inet.Quit(driver);
+
+            return allItems;
         }
+
+        
     }
 }

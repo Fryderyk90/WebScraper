@@ -25,29 +25,26 @@ namespace Scraper
 
 
 
-            //IData inetData = new Data();
-            //lib.Webhallen.Interface.IData wehallenData = new lib.Webhallen.Data();
+            IData inetData = new Data();
+            // lib.Webhallen.IData wehallenData = new lib.Webhallen.Aggregation.Data();
             // lib.Komplett.IData komplettData = new lib.Komplett.Aggregation.Data();
             // lib.DataBase.DataAccess dataAccess = new();
 
-            //var inetList = inetData.AllItems();
+            var inetList = inetData.AllItems();
             // var webhallenList = wehallenData.AllItems();
              //var komplettList = komplettData.AllItems();
 
-            //ScraperClient client = new();
+            ScraperClient client = new();
 
-            //Console.WriteLine("<<<<<<<<<<<<<INET>>>>>>>>>>>");
-            //client.DisplayItems(inetList);
-           
-            Console.WriteLine("<<<<<<<<<<<<<WEBHALLEN>>>>>>>>>>>");
-            WebhallenScrap scrap = new WebhallenScrap();
-            scrap.GetCards();
-            
-            //client.DisplayItems(webhallenList);
+            Console.WriteLine("<<<<<<<<<<<<<INET>>>>>>>>>>>");
+            client.DisplayItems(inetList);
+
+            // // Console.WriteLine("<<<<<<<<<<<<<WEBHALLEN>>>>>>>>>>>");
+            // // client.DisplayItems(webhallenList);
             // //
             //  Console.WriteLine("<<<<<<<<<<<<<KOMPLETT>>>>>>>>>>>");
-            //client.DisplayItems(komplettList);
-            //
+            //  client.DisplayItems(komplettList);
+            // //
             // // await dataAccess.AddDataAsync(inetList);
             // // await dataAccess.AddDataAsync(webhallenList);
             // // await dataAccess.AddDataAsync(komplettList);

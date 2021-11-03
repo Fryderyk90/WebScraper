@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using OpenQA.Selenium;
 using Scraper.lib.Client;
 
@@ -24,7 +25,7 @@ namespace Scraper.lib.Inet
                         
             return driver;
         }
-        public List<Item> InetItemList(ReadOnlyCollection<IWebElement> productList)
+        public List<Item> InetItemList(List<IWebElement> productList)
         {
             var itemList = new List<Item>();
             foreach (var product in productList)
@@ -78,9 +79,10 @@ namespace Scraper.lib.Inet
             }
         }
 
-        public ReadOnlyCollection<IWebElement> InetProducts(IWebDriver driver)
+        public List<IWebElement> InetProducts(IWebDriver driver)
         {
-            return driver.FindElements(By.XPath(Productlist));
+            
+            return driver.FindElements(By.XPath(Productlist)).ToList();
         }
 
          

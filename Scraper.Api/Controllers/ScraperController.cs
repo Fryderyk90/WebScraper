@@ -1,11 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using Scraper.lib;
-using Scraper.lib.Inet;
 using System.Collections.Generic;
-using System.Linq;
 using Scraper.lib.Client;
 using Scraper.lib.DataBase.Interface;
 
@@ -62,9 +57,9 @@ namespace Scraper.Api.Controllers
         {
             try
             {
-                var allitems = _dataManager.AllItemsAsync().GetAwaiter().GetResult();
+                var allItems = _dataManager.AllItemsAsync().GetAwaiter().GetResult();
                 
-                return Ok(allitems);
+                return Ok(allItems);
             }
             catch (Exception e)
             {

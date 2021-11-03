@@ -14,10 +14,12 @@ namespace Scraper.lib.Komplett
             komplett.NavigateToKomplett(driver);
             komplett.ScrollPage(driver);
             var komplettProducts = komplett.KomplettProducts(driver);
+           var allItems = komplett.KomplettItemList(komplettProducts);
             
-            return komplett.KomplettItemList(komplettProducts);
+            komplett.Quit(driver);
+            return allItems;
 
-            
+
         }
     }
 }
