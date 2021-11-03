@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
+using OpenQA.Selenium;
 using Scraper.lib.Client;
 
 namespace Scraper.lib.Webhallen
@@ -18,7 +20,6 @@ namespace Scraper.lib.Webhallen
                 var response = client.GetStringAsync($"https://www.webhallen.com/api/search?query%5BsortBy%5D=sales&query%5Bfilters%5D%5B0%5D%5Btype%5D=category&query%5Bfilters%5D%5B0%5D%5Bvalue%5D=4684&query%5BminPrice%5D=0&query%5BmaxPrice%5D=999999&page={i}").Result;
 
                 var cards = WebhallenItem.FromJson(response).Products.ToList();
-
                 foreach (var product in cards)
                 {
                     var item = new Item
@@ -37,6 +38,10 @@ namespace Scraper.lib.Webhallen
 
             return itemList;
         }
+
+
+
+
 
         public List<Item> WebhallenItemList(List<Product> cards)
         {

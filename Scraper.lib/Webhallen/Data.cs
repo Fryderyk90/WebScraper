@@ -19,5 +19,6 @@ namespace Scraper.lib.Webhallen
                 .Where(item => item.Name.Contains(name))
                 .ToList();
         }
+
     }
 }

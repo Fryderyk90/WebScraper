@@ -1,0 +1,18 @@
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Stock</th>
+      <th>Store</th>
+    </tr>
+  </thead>
+    <tbody>
+      <tr *ngFor="let p of service.productList">
+        <td (click)="populateForm(p)"><a href={{p.productLink}}></a>{{p.name}}</td>
+        <td>{{p.price}}</td>
+        <td>{{p.stock}}</td>
+        <td>{{p.store}}</td>
+      </tr>
+    </tbody>
+</table>
